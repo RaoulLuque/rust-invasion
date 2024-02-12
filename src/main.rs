@@ -1,6 +1,8 @@
+pub mod laser;
 mod player;
 mod systems;
 
+use laser::*;
 use player::*;
 use systems::*;
 
@@ -11,5 +13,6 @@ fn main() {
         .add_systems(Startup, spawn_camera)
         .add_plugins(DefaultPlugins)
         .add_plugins(PlayerPlugin)
+        .add_plugins(LaserPlugin)
         .run();
 }
