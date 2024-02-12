@@ -1,1 +1,6 @@
 /target
+/.cargo
+log.txt
+/.idea
+/.vscode
+fly.toml
