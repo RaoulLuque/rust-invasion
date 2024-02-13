@@ -6,6 +6,14 @@ pub fn spawn_camera(mut commands: Commands) {
     commands.spawn(Camera2dBundle::default());
 }
 
+pub fn spawn_background(mut commands: Commands, asset_server: Res<AssetServer>) {
+    commands.spawn((SpriteBundle {
+        transform: Transform::from_xyz(0.0, 0.0, -10.0),
+        texture: asset_server.load("background/Background.png"),
+        ..default()
+    },));
+}
+
 pub fn constrain_ship_movement(
     mut ship_query: Query<&mut Transform, Or<(&Player, &Enemy)>>,
     window_query: Query<&Window, With<PrimaryWindow>>,

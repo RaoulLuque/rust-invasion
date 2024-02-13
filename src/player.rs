@@ -6,9 +6,6 @@ use systems::*;
 
 use bevy::prelude::*;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, SystemSet)]
-struct AfterMovement;
-
 pub struct PlayerPlugin;
 
 impl Plugin for PlayerPlugin {

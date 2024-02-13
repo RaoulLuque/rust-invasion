@@ -1,7 +1,7 @@
 use crate::player::components::Player;
 use crate::{
     laser::components::{Direction, Friend, Laser},
-    resources::LaserDelayTimer,
+    laser::resources::LaserDelayTimer,
 };
 
 use bevy::{prelude::*, window::PrimaryWindow};
