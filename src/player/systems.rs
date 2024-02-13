@@ -1,5 +1,8 @@
 use crate::player::components::Player;
-use crate::{laser::components::Laser, resources::LaserDelayTimer};
+use crate::{
+    laser::components::{Direction, Friend, Laser},
+    resources::LaserDelayTimer,
+};
 
 use bevy::{prelude::*, window::PrimaryWindow};
 
@@ -86,10 +89,13 @@ pub fn shoot_laser(
                             player_translation.y + (PLAYER_HEIGHT / 2.0),
                             0.0,
                         ),
-                        texture: asset_server.load("sprites/Laser.png"),
+                        texture: asset_server.load("sprites/BlueLaser.png"),
                         ..default()
                     },
-                    Laser {},
+                    Laser {
+                        direction: Direction::Up,
+                    },
+                    Friend {},
                 ));
             }
             laser_delay_timer.timer.reset();
