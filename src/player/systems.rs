@@ -73,9 +73,7 @@ pub fn shoot_laser(
     player_query: Query<&Transform, With<Player>>,
     asset_server: Res<AssetServer>,
     mut laser_delay_timer: ResMut<LaserDelayTimer>,
-    time: Res<Time>,
 ) {
-    println!("Elapsed time: {}", laser_delay_timer.timer.elapsed_secs());
     if keyboard_input.pressed(KeyCode::Space) {
         if laser_delay_timer.timer.elapsed_secs() > 0.5 {
             if let Ok(player_transform) = player_query.get_single() {

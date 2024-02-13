@@ -1,15 +1,12 @@
 pub mod components;
 pub mod resources;
-mod systems;
+pub mod systems;
 
 use systems::*;
 
 use bevy::prelude::*;
 
 use self::resources::LaserDelayTimer;
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, SystemSet)]
-struct AfterMovement;
 
 pub struct LaserPlugin;
 
