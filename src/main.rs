@@ -13,6 +13,7 @@ use bevy::prelude::*;
 fn main() {
     App::new()
         .add_systems(Startup, spawn_camera)
+        .add_systems(Update, constrain_ship_movement)
         .add_plugins(DefaultPlugins)
         .add_plugins(PlayerPlugin)
         .add_plugins(EnemiesPlugin)

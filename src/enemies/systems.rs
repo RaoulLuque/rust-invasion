@@ -1,6 +1,9 @@
 use crate::laser::components::{Direction, Foe, Friend, Laser};
 
-use super::{components::Enemy, EnemyLaserTimer, NumberOfEnemiesLeft};
+use super::{
+    components::{Enemy, EnemyDirection},
+    EnemyLaserTimer, NumberOfEnemiesLeft,
+};
 use crate::laser::systems::LASER_HEIGHT;
 
 use bevy::{prelude::*, window::PrimaryWindow};
@@ -9,6 +12,7 @@ use rand::Rng;
 pub const ENEMY_WIDTH: f32 = 93.0;
 pub const ENEMY_HEIGHT: f32 = 84.0;
 pub const ENEMY_SHOOT_PROBABILITY: f64 = 0.01;
+pub const ENEMY_SPEED: f32 = 250.0;
 
 pub fn spawn_enemies(
     mut commands: Commands,
@@ -24,7 +28,7 @@ pub fn spawn_enemies(
     number_of_enemies.value = number_of_enemies_that_fit * 2;
     let space_between_enemies = (window.width()
         - (number_of_enemies_that_fit as f32 * ENEMY_WIDTH) as f32)
-        / ((number_of_enemies_that_fit + 1) as f32);
+        / ((number_of_enemies_that_fit) as f32);
 
     for i in 0..number_of_enemies_that_fit {
         commands.spawn((
@@ -39,7 +43,9 @@ pub fn spawn_enemies(
                 texture: asset_server.load("sprites/EnemyShip.png"),
                 ..default()
             },
-            Enemy {},
+            Enemy {
+                direction: EnemyDirection::Left,
+            },
         ));
         commands.spawn((
             SpriteBundle {
@@ -53,7 +59,9 @@ pub fn spawn_enemies(
                 texture: asset_server.load("sprites/EnemyShip.png"),
                 ..default()
             },
-            Enemy {},
+            Enemy {
+                direction: EnemyDirection::Right,
+            },
         ));
     }
 }
@@ -109,6 +117,15 @@ pub fn enemy_shoots_laser(
                     Foe {},
                 ));
             }
+        }
+    }
+}
+
+pub fn move_enemies(mut enemy_query: Query<(&mut Transform, &Enemy)>, time: Res<Time>) {
+    for (mut enemy_transform, enemy) in enemy_query.iter_mut() {
+        enemy_transform.translation += match enemy.direction {
+            EnemyDirection::Left => Vec3::new(-1.0, 0.0, 0.0) * ENEMY_SPEED * time.delta_seconds(),
+            EnemyDirection::Right => Vec3::new(1.0, 0.0, 0.0) * ENEMY_SPEED * time.delta_seconds(),
         }
     }
 }

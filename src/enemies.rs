@@ -1,4 +1,4 @@
-mod components;
+pub mod components;
 mod resources;
 mod systems;
 
@@ -16,6 +16,7 @@ impl Plugin for EnemiesPlugin {
             .add_systems(Startup, spawn_enemies)
             .add_systems(Update, enemy_shoots_laser)
             .add_systems(Update, tick_enemy_laser_timer)
+            .add_systems(Update, move_enemies)
             .add_systems(Update, enemy_hit_laser);
     }
 }
