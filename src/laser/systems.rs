@@ -27,7 +27,9 @@ pub fn delete_laser_if_out_of_screen(
         .expect("Primary window should exist");
 
     for (laser_entity, laser_transform) in laser_query.iter_mut() {
-        if laser_transform.translation.y > (window.height() / 2.0) + (LASER_HEIGHT / 2.0) {
+        if laser_transform.translation.y > (window.height() / 2.0) + (LASER_HEIGHT / 2.0)
+            || laser_transform.translation.y < (-window.height() / 2.0) - (LASER_HEIGHT / 2.0)
+        {
             commands.entity(laser_entity).despawn();
         }
     }
