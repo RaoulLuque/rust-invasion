@@ -43,6 +43,7 @@ pub fn start_stopwatch(mut laser_delay_timer: ResMut<LaserDelayTimer>) {
     laser_delay_timer.timer.reset();
 }
 
+#[allow(clippy::type_complexity)]
 pub fn laser_hit_player(
     mut commands: Commands,
     player_query: Query<(Entity, &Transform), With<Player>>,

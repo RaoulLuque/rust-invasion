@@ -54,28 +54,26 @@ pub fn shoot_laser(
     asset_server: Res<AssetServer>,
     mut laser_delay_timer: ResMut<LaserDelayTimer>,
 ) {
-    if keyboard_input.pressed(KeyCode::Space) {
-        if laser_delay_timer.timer.elapsed_secs() > 0.5 {
-            if let Ok(player_transform) = player_query.get_single() {
-                let player_translation = player_transform.translation;
+    if keyboard_input.pressed(KeyCode::Space) && laser_delay_timer.timer.elapsed_secs() > 0.5 {
+        if let Ok(player_transform) = player_query.get_single() {
+            let player_translation = player_transform.translation;
 
-                commands.spawn((
-                    SpriteBundle {
-                        transform: Transform::from_xyz(
-                            player_translation.x,
-                            player_translation.y + (PLAYER_HEIGHT / 2.0),
-                            0.0,
-                        ),
-                        texture: asset_server.load("sprites/BlueLaser.png"),
-                        ..default()
-                    },
-                    Laser {
-                        direction: Direction::Up,
-                    },
-                    Friend {},
-                ));
-            }
-            laser_delay_timer.timer.reset();
+            commands.spawn((
+                SpriteBundle {
+                    transform: Transform::from_xyz(
+                        player_translation.x,
+                        player_translation.y + (PLAYER_HEIGHT / 2.0),
+                        0.0,
+                    ),
+                    texture: asset_server.load("sprites/BlueLaser.png"),
+                    ..default()
+                },
+                Laser {
+                    direction: Direction::Up,
+                },
+                Friend {},
+            ));
         }
+        laser_delay_timer.timer.reset();
     }
 }

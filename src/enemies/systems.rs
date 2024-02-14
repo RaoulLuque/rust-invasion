@@ -27,7 +27,7 @@ pub fn spawn_enemies(
     let number_of_enemies_that_fit = (window.width() / ENEMY_WIDTH * 0.9) as u32;
     number_of_enemies.value = number_of_enemies_that_fit * 2;
     let space_between_enemies = (window.width()
-        - (number_of_enemies_that_fit as f32 * ENEMY_WIDTH) as f32)
+        - (number_of_enemies_that_fit as f32 * ENEMY_WIDTH))
         / ((number_of_enemies_that_fit) as f32);
 
     for i in 0..number_of_enemies_that_fit {
@@ -66,6 +66,7 @@ pub fn spawn_enemies(
     }
 }
 
+#[allow(clippy::type_complexity)]
 pub fn enemy_hit_laser(
     mut commands: Commands,
     enemy_query: Query<(Entity, &Transform), With<Enemy>>,
