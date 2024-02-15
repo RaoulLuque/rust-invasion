@@ -16,6 +16,7 @@ impl Plugin for MeteoritePlugin {
             .add_systems(Update, update_meteorite_position)
             .add_systems(Update, spawn_meteorites_over_time)
             .add_systems(Update, despawn_meteorites_out_of_screen)
+            .add_systems(Update, animate_sprite)
             .add_systems(Update, tick_meteorite_spawn_timer);
     }
 }
