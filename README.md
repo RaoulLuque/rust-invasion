@@ -6,7 +6,7 @@ There is not a lot of functionality to it and the purpose of this project was ge
 ## Starting the game
 To start the game check the bevy setup [page](https://bevyengine.org/learn/quick-start/getting-started/setup/) for dependencies needed for compiling locally. Then it's just running
 
-``` cargo run --bin connect-rust --release ``` <br>
+``` cargo run ``` <br>
 
 In the project directory
 
